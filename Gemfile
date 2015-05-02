@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'bourbon'
+gem 'neat'
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'omniauth'
