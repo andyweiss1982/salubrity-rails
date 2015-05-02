@@ -10,6 +10,14 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
  *= require_self
  */
+
+$red: #D13E26;
+$green: #A4CD39;
+$blue: #4BC5ED;
+$sand: #fff2d9;
+
+@import 'utils/reset';
+@import 'application/layout';
+@import 'application/landing';
