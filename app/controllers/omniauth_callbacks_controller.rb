@@ -14,7 +14,7 @@ require 'parse-ruby-client'
       if result.empty?
         new_user = Parse::Object.new("User")
         new_user['facebook_id'] = "#{@user.uid}"
-        new_user['first_name'] = "#{@user.name.split.first.to_s}"
+        new_user['first_name'] = "#{@user.name}"
         new_user.save
       end
 
