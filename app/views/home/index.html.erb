@@ -40,14 +40,31 @@
   <%= submit_tag "Submit" %>
 <% end %>
 
+<div class="hiv">
+  <%= @current_user.counter_values[:hiv] %>
+</div>
 
-<%#= @current_parse_user['first_name'] %>
+<div class="hpv">
+  <%= @current_user.counter_values[:hpv] %>
+</div>
 
-<%#= @current_user.friend_ids %>
-<%= @current_user.counter_values %>
+<div class="gonorrhea">
+  <%= @current_user.counter_values[:gonorrhea] %>
+</div>
+
+<div class="herpes">
+  <%= @current_user.counter_values[:herpes] %>
+</div>
+
+<div class="chlamydia">
+  <%= @current_user.counter_values[:chlamydia] %>
+</div>
+
+<div class="other">
+  <%= @current_user.counter_values[:other] %>
+</div>
 
 
-<%#= current_user.parse_record.hiv %>
 
 
 <%= link_to "Log out", destroy_user_session_path, :method => :delete  %>
