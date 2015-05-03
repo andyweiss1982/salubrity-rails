@@ -1,68 +1,102 @@
-<h1>Hello, there!</h1>
+<figure class='horizontal-logo'><%= image_tag "horizontal_logo.png" %></figure>
+
+<h2>Hi <%= @current_parse_user['first_name'] %>, of your <%=current_user.friends_on_parse.count%> friends on here...</h2>
+
+<section class="stats-container">
+  <div class="stats hiv">
+    <%= @current_user.counter_values[:hiv] %>
+    <p class="disclaimer">
+      are HIV+
+    </p>
+  </div>
+
+  <div class="stats hpv">
+    <%= @current_user.counter_values[:hpv] %>
+    <p class="disclaimer">
+      have HPV
+    </p>
+  </div>
+
+  <div class="stats gonorrhea">
+    <%= @current_user.counter_values[:gonorrhea] %>
+    <p class="disclaimer">
+      have Gonorrhea
+    </p>
+  </div>
+
+  <div class="stats herpes">
+    <%= @current_user.counter_values[:herpes] %>
+    <p class="disclaimer">
+      have Herpes
+    </p>
+  </div>
+
+  <div class="stats chlamydia">
+    <%= @current_user.counter_values[:chlamydia] %>
+    <p class="disclaimer">
+      have Chlamydia
+    </p>
+  </div>
+
+  <div class="stats other">
+    <%= @current_user.counter_values[:other] %>
+    <p class="disclaimer">
+      have another STI
+    </p>
+  </div>
+</section>
+
+<h2>Join the conversation.  I've got...</h2>
 
 
-<%= form_for current_user do |f| %>
-  HIV
-  <label class="label-switch">
-    <%= hidden_field_tag "user[hiv]", "false" %>
-    <%= check_box_tag "user[hiv]", "true", @current_parse_user['hiv'] == "true" ? true : false %>
-    <div class="checkbox"></div>
-  </label>
-  <br>
-  HPV
-  <label class="label-switch">
-    <%= hidden_field_tag "user[hpv]", "false" %>
-    <%= check_box_tag "user[hpv]", "true", @current_parse_user['hpv'] == "true" ? true : false %>
-    <div class="checkbox"></div>
-  </label>
-  <br>
-  HERPES
-  <label class="label-switch">
-    <%= hidden_field_tag "user[herpes]", "false" %>
-    <%= check_box_tag "user[herpes]", "true", @current_parse_user['herpes'] == "true" ? true : false %>
-    <div class="checkbox"></div>
-  </label>
-  <br>
-  GONORRHEA
-  <label class="label-switch">
-    <%= hidden_field_tag "user[gonorrhea]", "false" %>
-    <%= check_box_tag "user[gonorrhea]", "true", @current_parse_user['gonorrhea'] == "true" ? true : false %>
-    <div class="checkbox"></div>
-  </label>
-  <br>
-  OTHER
-  <label class="label-switch">
-    <%= hidden_field_tag "user[other]", "false" %>
-    <%= check_box_tag "user[other]", "true", @current_parse_user['other'] == "true" ? true : false %>
-    <div class="checkbox"></div>
-  </label>
+<section class="settings">
+  <%= form_for current_user do |f| %>
+    <article>
+      HIV
+      <label class="label-switch">
+        <%= hidden_field_tag "user[hiv]", "false" %>
+        <%= check_box_tag "user[hiv]", "true", @current_parse_user['hiv'] == "true" ? true : false %>
+        <div class="checkbox"></div>
+      </label>
+    </article>
+    <article>
+      HPV
+      <label class="label-switch">
+        <%= hidden_field_tag "user[hpv]", "false" %>
+        <%= check_box_tag "user[hpv]", "true", @current_parse_user['hpv'] == "true" ? true : false %>
+        <div class="checkbox"></div>
+      </label>
+    </article>
+    <article>
+      HERPES
+      <label class="label-switch">
+        <%= hidden_field_tag "user[herpes]", "false" %>
+        <%= check_box_tag "user[herpes]", "true", @current_parse_user['herpes'] == "true" ? true : false %>
+        <div class="checkbox"></div>
+      </label>
+    </article>
+    <article>
+      GONORRHEA
+      <label class="label-switch">
+        <%= hidden_field_tag "user[gonorrhea]", "false" %>
+        <%= check_box_tag "user[gonorrhea]", "true", @current_parse_user['gonorrhea'] == "true" ? true : false %>
+        <div class="checkbox"></div>
+      </label>
+    </article>
 
-  <%= submit_tag "Submit" %>
-<% end %>
+<<<<<<< HEAD
+=======
+    OTHER
+    <label class="label-switch">
+      <%= hidden_field_tag "user[other]", "false" %>
+      <%= check_box_tag "user[other]", "true", @current_parse_user['other'] == "true" ? true : false %>
+      <div class="checkbox"></div>
+    </label>
 
-<div class="hiv">
-  <%= @current_user.counter_values[:hiv] %>
-</div>
+    <%= submit_tag "Submit" %>
+  <% end %>
+</section>
 
-<div class="hpv">
-  <%= @current_user.counter_values[:hpv] %>
-</div>
-
-<div class="gonorrhea">
-  <%= @current_user.counter_values[:gonorrhea] %>
-</div>
-
-<div class="herpes">
-  <%= @current_user.counter_values[:herpes] %>
-</div>
-
-<div class="chlamydia">
-  <%= @current_user.counter_values[:chlamydia] %>
-</div>
-
-<div class="other">
-  <%= @current_user.counter_values[:other] %>
-</div>
-
-
+<%= link_to "Leave a message", home_feed_path %>
+>>>>>>> please no conflicts
 <%= link_to "Log out", destroy_user_session_path, :method => :delete  %>

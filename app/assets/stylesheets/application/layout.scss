@@ -2,9 +2,14 @@ html {
 	background-color: $sand;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1 {
 	color: $red;
 	font: italic normal bold 50.41px/62px "Century Gothic";
+}
+
+h2 {
+	font: italic normal bold 20px/30px "Century Gothic";
+	text-align: center;
 }
 
 .blue {
@@ -18,8 +23,37 @@ h1,h2,h3,h4,h5,h6 {
 .green {
 	background-color: $green;
 }
+.horizontal-logo {
+	margin-top: 50px;
+	text-align: center;
 
+}
+.settings {
+	width: 300px;
+	margin: 20px auto;
+	text-align: center;
+}
 .disclaimer {
 	color: #333;
 	font-size: .75rem;
+}
+.stats-container {
+	width: 600px;
+	margin: 0 auto;
+	background-color: rgba(255,255,255,0.35);
+	border: 1px solid #979797;
+	box-shadow: 0px 3px 5px 1px rgba(0,0,0,0.50);
+	border-radius: 23px;
+}
+.stats {
+	font-size: 100px;
+	color: $red;
+	display: inline-block;
+	width: 196px;
+	height: 200px;
+	text-align: center;
+}
+article {
+	display: inline-block;
+	margin: 10px;
 }
