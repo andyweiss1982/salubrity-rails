@@ -47,3 +47,151 @@
 
 
 <%= link_to "Log out", destroy_user_session_path, :method => :delete  %>
+
+
+
+
+
+<div id="notes"></div>
+
+<script type="text/jsx">
+
+var getToken = function(callback){
+  $.getJSON('/api/get_token', function(data){
+    callback(data.token)
+  })
+};
+
+var postWithToken = function(options){
+  
+
+  getToken(function(token){
+    var defaultOptions = {
+        headers: {'X-CSRF-Token': token},
+        dataType: 'json',
+        type: 'POST'
+      }
+    var options2 = $.extend(options, defaultOptions);
+
+     $.ajax(options);
+    })
+}
+
+var NoteContainer = React.createClass({
+  loadNotesFromServer: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+  handleNoteSubmit: function(note) {
+    var notes = this.state.data;
+    var newNotes = notes.concat([note['message']]);
+    console.log('new notes', newNotes);
+    var self = this;
+    this.setState({data: newNotes});
+    postWithToken({
+          url: self.props.url,
+          data: note,
+          success: function(data) {
+            // self.setState({data: data});
+          }.bind(self),
+          error: function(xhr, status, err) {
+            console.error(this.props.url, status, err.toString());
+          }.bind(self)
+    })
+  },
+  getInitialState: function() {
+    return {data: []};
+  },
+  componentDidMount: function() {
+    this.loadNotesFromServer();
+    setInterval(this.loadNotesFromServer, this.props.pollInterval);
+  },
+  render: function() {
+    return (
+      <div className="noteContainer">
+        <h1>Notes</h1>
+        <NoteList data={this.state.data} />
+        <NoteForm onNoteSubmit={this.handleNoteSubmit} />
+      </div>
+    );
+  }
+});
+
+var NoteList = React.createClass({
+  render: function() {
+    // console.log( 'STATE', this.state.data)
+    try {
+
+    var noteNodes = this.props.data.map(function (note) {
+      return (
+        <Note>
+          {note.message}
+        </Note>
+      );
+    });
+    } catch (err) {
+      console.log( 'PROPS', this.props.data)
+      throw err;
+    }
+    return (
+      <div className="noteList">
+        {noteNodes}
+      </div>
+    );
+  }
+});
+
+var NoteForm = React.createClass({
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var message = React.findDOMNode(this.refs.message).value.trim();
+    if (!message) {
+      return;
+    }
+    this.props.onNoteSubmit({message: message});
+    React.findDOMNode(this.refs.message).value = '';
+    return;
+  },
+  render: function() {
+    return (
+      <form className="noteForm" onSubmit={this.handleSubmit}>
+        <input type="text" placeholder="Say something..." ref="message" />
+        <input type="submit" value="Post" />
+      </form>
+    );
+  }
+});
+
+var Note = React.createClass({
+  render: function() {
+    return (
+      <div className="note">
+        {this.props.children}
+      </div>
+    );
+  }
+});
+
+React.render(
+  <NoteContainer url="notes.json" pollInterval={2000}/>,
+  document.getElementById('notes')
+);
+
+console.log("Some shit")
+</script>
+
+
+
+
+
+
+

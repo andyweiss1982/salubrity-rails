@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'api/get_token'
   get 'home/index'
   root 'home#index'
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
 
   resources :users, only: [:edit, :update]
+  resources :notes
 
 
   # The priority is based upon order of creation: first created -> highest priority.

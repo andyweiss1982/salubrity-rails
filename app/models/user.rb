@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  # require "httparty"
+  require "httparty"
 
   PARSE_APPLICATION_ID = "ye9rhnCo5jyvk86O7iCYHOGTaNbSvfyMpzMSSuTK"
   PARSE_API_KEY = "3CAMBv8GOSo6kIS5Od1110JqdxYk3WvfYlxWS72n"
@@ -65,7 +65,6 @@ class User < ActiveRecord::Base
   end
 
   def ping_facebook
-    require 'httparty'
     response = HTTParty.get("https://graph.facebook.com/v2.3/#{self.uid}/friends?access_token=#{self.token}")
     puts response.body
   end
