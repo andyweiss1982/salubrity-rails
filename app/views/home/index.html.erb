@@ -1,3 +1,10 @@
+<div class="userinfo">
+  <div class="avatar"><%= image_tag "avatar.png" %></div>
+  <%= @current_parse_user['first_name'] %> |
+  <%= link_to "Log out", destroy_user_session_path, :method => :delete  %>
+</div>
+
+
 <figure class='horizontal-logo'><%= image_tag "horizontal_logo.png" %></figure>
 
 <h2>Hi <%= @current_parse_user['first_name'] %>, of your <%=current_user.friends_on_parse.count%> friends on here...</h2>
@@ -46,7 +53,7 @@
   </div>
 </section>
 
-<h2>Join the conversation.  I've got...</h2>
+<h2><%= link_to "Join the Conversation", home_feed_path %></h2>
 
 
 <section class="settings">
@@ -68,6 +75,7 @@
       </label>
     </article>
     <article>
+    <br>
       HERPES
       <label class="label-switch">
         <%= hidden_field_tag "user[herpes]", "false" %>
@@ -84,16 +92,33 @@
       </label>
     </article>
 
-    OTHER
-    <label class="label-switch">
-      <%= hidden_field_tag "user[other]", "false" %>
-      <%= check_box_tag "user[other]", "true", @current_parse_user['other'] == "true" ? true : false %>
-      <div class="checkbox"></div>
-    </label>
+    <article>
+      CHLAMYDIA
+      <label class="label-switch">
+        <%= hidden_field_tag "user[chlamydia]", "false" %>
+        <%= check_box_tag "user[chlamydia]", "true", @current_parse_user['chlamydia'] == "true" ? true : false %>
+        <div class="checkbox"></div>
+      </label>
+    </article>
 
-    <%= submit_tag "Submit" %>
+    <article>
+      OTHER
+      <label class="label-switch">
+        <%= hidden_field_tag "user[other]", "false" %>
+        <%= check_box_tag "user[other]", "true", @current_parse_user['other'] == "true" ? true : false %>
+        <div class="checkbox"></div>
+      </label>
+    </article>
+
+    <p>Would you like to go public with your information?</p>
+      <label class="label-switch">
+        <%= hidden_field_tag "user[anonymous]", "false" %>
+        <%= check_box_tag "user[anonymous]", "true", @current_parse_user['anonymous'] == "true" ? true : false %>
+        <div class="checkbox"></div>
+      </label>
+
+    <p>
+      <%= submit_tag "Submit" %>
+    </p>
   <% end %>
 </section>
-
-<%= link_to "Leave a message", home_feed_path %>
-<%= link_to "Log out", destroy_user_session_path, :method => :delete  %>

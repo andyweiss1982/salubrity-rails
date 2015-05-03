@@ -1,4 +1,4 @@
-<iframe width="500" height="300" src="<%=new_comment_path%>"></iframe>
+<iframe width="100%" height="300" frameBorder="0" src="<%=new_comment_path%>"></iframe>
 
 
 <script type="text/jsx">
@@ -44,8 +44,8 @@ var CommentBox = React.createClass({
   render: function() {
     return (
       <div className="commentBox">
-        <h1>Comments from your friends group</h1>
-        <CommentList data={this.state.data} />
+        <h2>Comments from your friends group</h2>
+        <p class="comment"><CommentList data={this.state.data} /></p>
         
       </div>
     );
@@ -86,7 +86,7 @@ var CommentForm = React.createClass({
     return (
       <form className="commentForm" onSubmit={this.handleSubmit}>
         <input type="text" placeholder="Your name" ref="author" />
-        <input type="text" placeholder="Say something..." ref="text" />
+        <textarea ref="text">Test</textarea>
         <input type="submit" value="Post" />
       </form>
     );
