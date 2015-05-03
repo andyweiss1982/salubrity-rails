@@ -9,6 +9,7 @@ gem 'omniauth-facebook'
 gem 'omniauth'
 gem "parse-ruby-client"
 gem 'rails_12factor'
+gem 'unicorn'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record
