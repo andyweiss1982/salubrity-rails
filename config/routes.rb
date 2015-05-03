@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/feed'
   root 'home#index'
-  get 'comments/api'
+  get "comments#api", controller: 'comments', action: 'api'
   
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
 

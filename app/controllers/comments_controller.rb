@@ -1,20 +1,23 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  before_action :get_current_parse_user
-  skip_before_action :authenticate_user!, :only => [:api]
+  before_action :get_current_parse_user, except: [:index]
+  skip_before_action :authenticate_user!, :only => [:index]
 
   # GET /comments
   # GET /comments.json
   def index
-    good_ids = current_user.friend_ids
-    good_ids << current_user.uid
-    @comments = Comment.where(fbid: good_ids).order(created_at: :desc).limit(10)
+    if current_user
+      good_ids = current_user.friend_ids
+      good_ids << current_user.uid
+      @comments = Comment.where(fbid: good_ids).order(created_at: :desc).limit(10)
+    end
+    @comments2 = Comment.order(created_at: :desc).limit(10)
   end
 
   def api
-    good_ids = current_user.friend_ids
-    good_ids << current_user.uid
-    @comments = Comment.where(fbid: good_ids).order(created_at: :desc).limit(10)
+    # good_ids = current_user.friend_ids
+    # good_ids << current_user.uid
+    @comments = Comment.order(created_at: :desc).limit(10)
   end
 
   # GET /comments/1
