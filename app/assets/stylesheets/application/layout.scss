@@ -2,6 +2,11 @@ html {
 	background-color: $sand;
 }
 
+h1,h2,h3,h4,h5,h6 {
+	color: $red;
+	font: italic normal bold 50.41px/62px "Century Gothic";
+}
+
 .blue {
  	background-color: $blue;
  }
