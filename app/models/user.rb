@@ -12,6 +12,13 @@ class User < ActiveRecord::Base
         user.email = auth.info.email
         user.name = auth.info.first_name
         user.password = Devise.friendly_token[0,20]
+        user.token = auth.credentials.token
       end
+  end
+
+  def ping_facebook
+    require 'httparty'
+    response = HTTParty.get("https://graph.facebook.com/v2.3/#{self.uid}/friends?access_token=#{self.token}")
+    puts response.body
   end
 end

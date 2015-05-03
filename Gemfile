@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'httparty'
 gem 'bourbon'
 gem 'neat'
 gem 'devise'

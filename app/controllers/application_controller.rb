@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     [:sign_up, :account_update].each do |action|
-      devise_parameter_sanitizer.for(action).push(:uid, :provider, :name)
+      devise_parameter_sanitizer.for(action).push(:uid, :provider, :name, :token)
     end
   end
 
