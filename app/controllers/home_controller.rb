@@ -4,6 +4,10 @@ class HomeController < ApplicationController
   def index
   end
 
+  def feed
+    render layout: "react"
+  end
+
   private
 
   def get_current_parse_user
