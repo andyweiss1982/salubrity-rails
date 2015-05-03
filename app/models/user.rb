@@ -64,9 +64,56 @@ class User < ActiveRecord::Base
     )
   end
 
-  def ping_facebook
+  def friend_ids
     require 'httparty'
     response = HTTParty.get("https://graph.facebook.com/v2.3/#{self.uid}/friends?access_token=#{self.token}")
-    puts response.body
+
+    hash = JSON.parse(response.body)
+    hash['data'].map{ |x| x['id'] }
   end
+
+  def friends_on_parse
+    my_friends_on_parse = []
+    
+    friend_ids.each do |id|
+      query = Parse::Query.new("User")
+      query.eq('facebook_id', id)
+      response = query.get 
+      unless response.empty?
+        my_friends_on_parse<<response.first
+      end
+    end  
+    
+    my_friends_on_parse
+  end
+
+  def counter_values 
+    hiv = 0
+    herpes = 0
+    chlamydia = 0
+    gonorrhea = 0
+    hpv = 0
+    other = 0
+
+    friends_on_parse.each do |friend|
+      hiv +=1 if friend['hiv'] == 'true'
+      herpes +=1 if friend['herpes'] == 'true'
+      chlamydia +=1 if friend['chlamydia'] == 'true'
+      gonorrhea +=1 if friend['gonorrhea'] == 'true'
+      hpv +=1 if friend['hpv'] == 'true'
+      other +=1 if friend['other'] == 'true'
+    end
+
+    {hiv: hiv, herpes: herpes, chlamydia: chlamydia, gonorrhea: gonorrhea, hpv: hpv, other: other}
+  end
+
 end
+
+
+
+
+
+
+
+
+
