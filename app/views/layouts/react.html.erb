@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Hello React</title>
+    <title>React Feed</title>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <script src="https://fb.me/react-0.13.2.js"></script>
     <script src="https://fb.me/JSXTransformer-0.13.2.js"></script>
@@ -20,7 +20,11 @@
 
 
 
-    <figure class='horizontal-logo'><%= image_tag "horizontal_logo.png" %></figure>
+    <figure class='horizontal-logo'>
+      <%= link_to root_path do %>
+        <%= image_tag "horizontal_logo.png" %>
+      <% end %>
+    </figure>
     <%= yield %>
     <div id="content"></div>
   </body>
